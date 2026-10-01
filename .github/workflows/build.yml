@@ -1,9 +1,9 @@
 name: Build C++ EXE
-run: g++ cpp/main.cpp -o program.exe
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -11,8 +11,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Check files
+        run: dir /s /b
 
       - name: Compile C++
         run: g++ main.cpp -o program.exe
