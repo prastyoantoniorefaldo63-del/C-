@@ -26,7 +26,7 @@ jobs:
 
           Write-Host "File C++ ditemukan: $($cpp.FullName)"
 
-          g++ "$($cpp.FullName)" -o program.exe -static-libgcc -static-libstdc++
+          g++ "$($cpp.FullName)" -o program.exe -static -static-libgcc -static-libstdc++
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
