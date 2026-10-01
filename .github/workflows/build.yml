@@ -1,4 +1,5 @@
 name: Build C++ EXE
+run: g++ cpp/main.cpp -o program.exe
 
 on:
   push:
