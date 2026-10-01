@@ -14,12 +14,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check files
-        shell: cmd
-        run: dir /s /b
+      - name: Find and compile C++
+        shell: powershell
+        run: |
+          $cpp = Get-ChildItem -Path . -Filter *.cpp -Recurse | Select-Object -First 1
 
-      - name: Compile C++
-        run: g++ main.cpp -o program.exe
+          if (-not $cpp) {
+            Write-Error "File .cpp tidak ditemukan!"
+            exit 1
+          }
+
+          Write-Host "File C++ ditemukan: $($cpp.FullName)"
+          g++ "$($cpp.FullName)" -o program.exe
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
